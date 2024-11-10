@@ -24,5 +24,6 @@ public class AccountApiController {
                 .email("A@gmail.com")
                 .registeredAt(LocalDateTime.now())
                 .build();
+
     }
 }
