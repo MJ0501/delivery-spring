@@ -23,7 +23,7 @@ public class LoggerFilter implements Filter {
 
         // request 정보 로깅 제외 조건
         var uri = req.getRequestURI();
-        if ("/v3/api-docs/swagger-config".equals(uri) || "/v3/api-docs".equals(uri)) {
+        if ("/v3/api-docs/swagger-config".equals(uri) || "/v3/api-docs".equals(uri)||"/swagger-ui/favicon-32x32.png".equals(uri)) {
             res.copyBodyToResponse();
             return;
         }
