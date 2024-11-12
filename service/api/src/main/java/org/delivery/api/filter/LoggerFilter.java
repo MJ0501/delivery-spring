@@ -17,16 +17,18 @@ public class LoggerFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         var req = new ContentCachingRequestWrapper((HttpServletRequest) request);
         var res = new ContentCachingResponseWrapper((HttpServletResponse) response);
+        log.info("INIT : {} ", ((HttpServletRequest) request).getRequestURI());
         chain.doFilter(req,res);
 
         // request 정보 로깅 제외 조건
-        var uri = req.getRequestURI();
-        if ("/v3/api-docs/swagger-config".equals(uri) || "/v3/api-docs".equals(uri)||"/swagger-ui/favicon-32x32.png".equals(uri)) {
-            res.copyBodyToResponse();
-            return;
-        }
+//        var uri = req.getRequestURI();
+//        if ("/v3/api-docs/swagger-config".equals(uri) || "/v3/api-docs".equals(uri)||"/swagger-ui/favicon-32x32.png".equals(uri)) {
+//            res.copyBodyToResponse();
+//            return;
+//        }
 
         //request 정보
         var headerNames = req.getHeaderNames();
@@ -37,7 +39,7 @@ public class LoggerFilter implements Filter {
                    .append(headerValue).append("] ");
         });
         var requestBody = new String(req.getContentAsByteArray());
-        //var uri = req.getRequestURI();
+        var uri = req.getRequestURI();
         var method = req.getMethod();
         log.info(">> uri: {}, method: {}, header : {}, body : {}", uri, method,headerValues, requestBody);
 
