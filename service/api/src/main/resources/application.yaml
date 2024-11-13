@@ -11,3 +11,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: admin1234!
+
+token:
+  secret:
+    key: !The SecretKey!MustBe**atLeast_256Bits**_for#JWT_TokenAuthorization#Dueto_*SECURITY*_reasons,Notjust_Because_ItUses<HS256>.
+  access-token:
+    plus-hour: 1
+  refresh-token:
+    plus-hour: 12
